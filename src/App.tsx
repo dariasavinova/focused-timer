@@ -1,6 +1,16 @@
+import { Outlet } from 'react-router-dom'
+import Header from '@/components/Header/Header.tsx'
+
+import './styles/base.scss'
+import './styles/reset.scss'
+import './styles/variables.scss'
+
 const App = () => {
   return (
-    <h1>Focused-Timer</h1>
+    <div>
+      <Header />
+      <Outlet />
+    </div>
   )
 }
 
