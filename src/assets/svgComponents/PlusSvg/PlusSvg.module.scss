@@ -1,0 +1,14 @@
+.wrapper {
+  &:hover .svg_background {
+    fill: var(--black);
+  }
+
+  &:hover .svg_color {
+    fill: var(--white);
+  }
+}
+
+.svg_background, .svg_color {
+  transition: fill 0.25s ease;
+}
+
