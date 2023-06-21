@@ -6,12 +6,20 @@ html {
 
 * {
   color: var(--black);
-  background-color: var(--grey-background);
 }
 
 body {
   padding: 0 25px;
   height: 100%;
+  background-color: var(--grey-background);
   max-width: 1320px;
   margin: 0 auto;
+}
+
+.container {
+  background-color: #fff;
+  box-shadow: var(--accent-shadow);
+  border-radius: 10px;
+  min-height: calc(96vh - 102px);
+  padding: 40px 50px;
 }
