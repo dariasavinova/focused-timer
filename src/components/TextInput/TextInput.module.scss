@@ -3,4 +3,17 @@
   padding: 10px 20px;
   min-width: 300px;
   width: 100%;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1.6px solid var(--grey-element);
+  transition: all 0.25s ease;
+
+  &:focus {
+    background-color: var(--white);
+    border: 1.6px solid var(--blue);
+  }
+
+  &:hover {
+    border: 1.6px solid var(--blue);
+  }
 }
