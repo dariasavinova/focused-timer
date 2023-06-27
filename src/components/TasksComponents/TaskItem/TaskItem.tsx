@@ -25,6 +25,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
 
   const handleEditCurrentInput = (e: ChangeEvent) => {
     dispatch(editCurrentTask({ taskId, taskName: (e.target as HTMLInputElement).value }))
+    // TODO: use lodash for optimisation
   }
 
   useEffect(() => {
@@ -48,6 +49,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
         <TaskItemPopup
           setIsInputDisabled={setIsInputDisabled}
           setIsPopupVisible={setIsPopupVisible}
+          taskId={taskId}
           className={styles.popup}
         />
       )}
