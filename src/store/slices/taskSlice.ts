@@ -26,10 +26,10 @@ export const taskSlice = createSlice({
   initialState,
   reducers: {
     createNewTask: (state, action: PayloadAction<string>) => {
-      state.tasks.push({ ...taskItem, id: uuidv4(), taskName: action.payload })
+      state.tasks?.push({ ...taskItem, id: uuidv4(), taskName: action.payload })
     },
     editCurrentTask: (state, action) => {
-      state.tasks = state.tasks.map(task => {
+      state.tasks = state.tasks?.map(task => {
         if (task.id === action.payload.taskId) {
           return { ...task, taskName: action.payload.taskName }
         }
@@ -37,7 +37,7 @@ export const taskSlice = createSlice({
       })
     },
     deleteCurrentTask: (state, action: PayloadAction<string>) => {
-      state.tasks = state.tasks.filter(task => task.id !== action.payload)
+      state.tasks = state.tasks?.filter(task => task.id !== action.payload)
     }
   }
 })

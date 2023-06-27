@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react'
 import classNames from 'classnames'
 
 import styles from './TaskItemPopup.module.scss'
+
 import { useAppDispatch } from '@/hooks/storeDefaultHooks.ts'
 import { deleteCurrentTask } from '@/store/slices/taskSlice.ts'
 
@@ -20,16 +21,14 @@ const TaskItemPopup: React.FC<TaskItemPopupProps> = ({ setIsInputDisabled, setIs
     setIsPopupVisible(false)
   }
 
-  const handleClickDeleteTask = () => {
-    dispatch(deleteCurrentTask(taskId))
-  }
-
   return (
     <ul className={classNames(styles.wrapper, className)}>
       <li className={styles.wrapper__item} onClick={handleClickEditTask}>
         Редактировать
       </li>
-      <li className={styles.wrapper__item} onClick={handleClickDeleteTask}>Удалить</li>
+      <li className={styles.wrapper__item} onClick={() => dispatch(deleteCurrentTask(taskId))}>
+        Удалить
+      </li>
     </ul>
   )
 }

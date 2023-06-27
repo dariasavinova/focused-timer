@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react'
 
 import styles from './TaskItem.module.scss'
 
@@ -19,13 +19,13 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
   const [isPopupVisible, setIsPopupVisible] = useState(false)
   const textInputRef = useRef<HTMLInputElement>(null)
 
-  const handleClickDetails = () => {
-    setIsPopupVisible(!isPopupVisible)
-  }
-
-  const handleEditCurrentInput = (e: ChangeEvent) => {
+  const handleEditCurrentInput = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(editCurrentTask({ taskId, taskName: (e.target as HTMLInputElement).value }))
     // TODO: use lodash for optimisation
+  }
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === 'Enter') setIsInputDisabled(true)
   }
 
   useEffect(() => {
@@ -40,11 +40,11 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
         ref={textInputRef}
         className={styles.input}
         value={taskName}
-        onChange={(e) => handleEditCurrentInput(e)}
+        onChange={handleEditCurrentInput}
         disabled={isInputDisabled}
+        onKeyDown={handleKeyDown}
       />
-      <div className={styles.details} onClick={handleClickDetails}>...</div>
-
+      <div className={styles.details} onClick={() => setIsPopupVisible(!isPopupVisible)}>...</div>
       {isPopupVisible && (
         <TaskItemPopup
           setIsInputDisabled={setIsInputDisabled}

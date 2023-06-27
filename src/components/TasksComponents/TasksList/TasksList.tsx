@@ -1,7 +1,8 @@
 import React from 'react'
-import { useAppSelector } from '@/hooks/storeDefaultHooks.ts'
+
 import Title from '@/components/Title/Title.tsx'
 import TaskItem from '@/components/TasksComponents/TaskItem/TaskItem.tsx'
+import { useAppSelector } from '@/hooks/storeDefaultHooks.ts'
 
 const TasksList: React.FC = () => {
   const tasks = useAppSelector(state => state.taskSlice.tasks)
@@ -10,7 +11,7 @@ const TasksList: React.FC = () => {
     <>
       {tasks.length > 0 ? (
         <ul>
-          {tasks.map(task => (
+          {tasks?.map(task => (
             <TaskItem key={task.id} taskId={task.id} taskName={task.taskName} />
           ))}
         </ul>

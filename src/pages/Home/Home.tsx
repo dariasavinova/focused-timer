@@ -6,14 +6,13 @@ import NewTaskCreation from '@/components/TasksComponents/NewTaskCreation/NewTas
 import Title from '@/components/Title/Title.tsx'
 import TasksList from '@/components/TasksComponents/TasksList/TasksList.tsx'
 
-const Home: React.FC = () => {
-  return (
-    <>
-      <Title className={styles.title} level={3}>Все задачи</Title>
-      <NewTaskCreation className={styles.newTask} />
-      <TasksList />
-    </>
-  )
-}
+const Home: React.FC = () => (
+  <>
+    <Title className={styles.title} level={3}>Все задачи</Title>
+    <NewTaskCreation className={styles.newTask} />
+    <TasksList />
+  </>
+)
+
 
 export default Home

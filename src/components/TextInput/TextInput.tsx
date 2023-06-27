@@ -9,6 +9,7 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
   const { className, ...rest } = props
+
   return (
     <input className={classNames(styles.input, className)} {...rest} ref={ref} />
   )

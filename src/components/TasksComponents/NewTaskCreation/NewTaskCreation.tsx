@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, MouseEvent, useState } from 'react'
+import React, { KeyboardEvent, useState } from 'react'
 import classNames from 'classnames'
 
 import styles from './NewTaskCreation.module.scss'
@@ -15,27 +15,31 @@ interface NewTaskCreationProps {
 
 const NewTaskCreation: React.FC<NewTaskCreationProps> = ({ className }) => {
   const [inputValue, setInputValue] = useState('')
-
   const dispatch = useAppDispatch()
 
-  const handleCreateNewTask = (e: MouseEvent | KeyboardEvent) => {
+  const handleCreateNewTask = () => {
     if (!inputValue) return
-    if ((e as MouseEvent).type === 'click' || (e as KeyboardEvent).code === 'Enter') {
-      dispatch(createNewTask(inputValue))
-      setInputValue('')
+    dispatch(createNewTask(inputValue))
+    setInputValue('')
+  }
+
+  const handleKeydownCreateNewTask = (e: KeyboardEvent) => {
+    if (e.code === 'Enter') {
+      handleCreateNewTask()
     }
   }
 
   return (
     <div className={classNames(styles.wrapper, className)}>
       <InputGroup>
-        <TextInput className={styles.input}
-                   placeholder={'Создать новую задачу'}
-                   value={inputValue}
-                   onChange={e => setInputValue(e.target.value)}
-                   onKeyDown={(e) => handleCreateNewTask(e)}
+        <TextInput
+          className={styles.input}
+          placeholder={'Создать новую задачу'}
+          value={inputValue}
+          onChange={e => setInputValue(e.target.value)}
+          onKeyDown={handleKeydownCreateNewTask}
         />
-        <Button onClick={(e) => handleCreateNewTask(e)}>+</Button>
+        <Button onClick={handleCreateNewTask}>+</Button>
       </InputGroup>
     </div>
   )

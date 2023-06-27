@@ -1,19 +1,17 @@
 import React from 'react'
+import classNames from 'classnames'
 
 import styles from './InputGroup.module.scss'
-import classNames from 'classnames'
 
 interface InputGroupProps {
   className?: string
   children: React.ReactNode
 }
 
-const InputGroup: React.FC<InputGroupProps> = ({ className, children }) => {
-  return (
-    <div className={classNames(styles.wrapper, className)}>
-      {children}
-    </div>
-  )
-}
+const InputGroup: React.FC<InputGroupProps> = ({ className, children }) => (
+  <div className={classNames(styles.wrapper, className)}>
+    {children}
+  </div>
+)
 
 export default InputGroup
