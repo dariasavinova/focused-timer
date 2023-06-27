@@ -17,10 +17,10 @@ const TaskItemPopup: React.FC<TaskItemPopupProps> = ({ setIsInputDisabled, setIs
 
   return (
     <ul className={classNames(styles.wrapper, className)}>
-      <li className={styles.item} onClick={handleClickEditTask}>
+      <li className={styles.wrapper__item} onClick={handleClickEditTask}>
         Редактировать
       </li>
-      <li className={styles.item}>Удалить</li>
+      <li className={styles.wrapper__item}>Удалить</li>
     </ul>
   )
 }
