@@ -1,24 +1,25 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import classNames from 'classnames'
 
-import styles from './TaskItemPopup.module.scss'
+import styles from './TaskItemDropdown.module.scss'
 
 import { useAppDispatch } from '@/hooks/storeDefaultHooks.ts'
 import { deleteCurrentTask } from '@/store/slices/taskSlice.ts'
 
-interface TaskItemPopupProps {
+interface TaskItemDropdownProps {
   setIsInputDisabled: Dispatch<SetStateAction<boolean>>
-  setIsPopupVisible: Dispatch<SetStateAction<boolean>>
+  setIsDropdownVisible: Dispatch<SetStateAction<boolean>>
   taskId: string
   className?: string
 }
 
-const TaskItemPopup: React.FC<TaskItemPopupProps> = ({ setIsInputDisabled, setIsPopupVisible, taskId, className }) => {
+const TaskItemDropdown: React.FC<TaskItemDropdownProps> = (props) => {
+  const { setIsInputDisabled, setIsDropdownVisible, taskId, className } = props
   const dispatch = useAppDispatch()
 
   const handleClickEditTask = () => {
     setIsInputDisabled(false)
-    setIsPopupVisible(false)
+    setIsDropdownVisible(false)
   }
 
   return (
@@ -33,4 +34,4 @@ const TaskItemPopup: React.FC<TaskItemPopupProps> = ({ setIsInputDisabled, setIs
   )
 }
 
-export default TaskItemPopup
+export default TaskItemDropdown

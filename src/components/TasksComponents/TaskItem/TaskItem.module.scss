@@ -8,6 +8,7 @@
 
 .input {
   background-color: transparent;
+  margin: 0 0 10px;
 }
 
 .details {
@@ -20,8 +21,9 @@
   font-size: 20px;
 }
 
-.popup {
+.dropdown {
   position: absolute;
   top: 48px;
   right: 0;
+  z-index: 1000;
 }
