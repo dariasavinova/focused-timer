@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './PlusSvg.module.scss'
+import styles from '../styles/Svg.module.scss'
 
 interface PlusSvgProps {
   background: string

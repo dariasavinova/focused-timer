@@ -6,6 +6,7 @@ import styles from './TaskItem.module.scss'
 import InputGroup from '@/components/InputGroup/InputGroup.tsx'
 import TextInput from '@/components/TextInput/TextInput.tsx'
 import TaskItemDropdown from '@/components/TasksComponents/TaskItemDropdown/TaskItemDropdown.tsx'
+import DotsSvg from '@/assets/svgComponents/DotsSvg/DotsSvg.tsx'
 import { useAppDispatch } from '@/hooks/storeDefaultHooks.ts'
 import { editCurrentTask } from '@/store/slices/taskSlice.ts'
 
@@ -38,7 +39,6 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
 
   const handleEditCurrentInput = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(editCurrentTask({ taskId, taskName: (e.target as HTMLInputElement).value }))
-    // TODO: use lodash for optimisation
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -58,7 +58,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
       <div className={styles.details}
            onClick={() => setIsDropdownVisible(!isDropdownVisible)}
            ref={taskDetailsRef}>
-        ...
+        <DotsSvg />
       </div>
       {isDropdownVisible && (
         <div ref={dropdownRef}>

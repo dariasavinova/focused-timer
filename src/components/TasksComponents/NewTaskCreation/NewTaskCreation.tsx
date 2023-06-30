@@ -2,6 +2,7 @@ import React, { KeyboardEvent, useState } from 'react'
 import classNames from 'classnames'
 
 import styles from './NewTaskCreation.module.scss'
+import MinimalPlusSvg from '@/assets/svgComponents/MinimalPlusSvg/MinimalPlusSvg.tsx'
 
 import InputGroup from '@/components/InputGroup/InputGroup.tsx'
 import TextInput from '@/components/TextInput/TextInput.tsx'
@@ -15,6 +16,7 @@ interface NewTaskCreationProps {
 
 const NewTaskCreation: React.FC<NewTaskCreationProps> = ({ className }) => {
   const [inputValue, setInputValue] = useState('')
+  const [hoveredButton, setHoveredButton] = useState(false)
   const dispatch = useAppDispatch()
 
   const handleCreateNewTask = () => {
@@ -39,7 +41,12 @@ const NewTaskCreation: React.FC<NewTaskCreationProps> = ({ className }) => {
           onChange={e => setInputValue(e.target.value)}
           onKeyDown={handleKeydownCreateNewTask}
         />
-        <Button onClick={handleCreateNewTask}>+</Button>
+        <Button onClick={handleCreateNewTask}
+                onMouseEnter={() => setHoveredButton(true)}
+                onMouseLeave={() => setHoveredButton(false)}
+        >
+          <MinimalPlusSvg color={hoveredButton ? '#fff' : '#222937'} />
+        </Button>
       </InputGroup>
     </div>
   )
