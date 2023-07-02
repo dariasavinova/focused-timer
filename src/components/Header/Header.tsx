@@ -7,13 +7,10 @@ import logo from '@/assets/logo.svg'
 import Title from '@/components/Title/Title.tsx'
 import MenuSvg from '@/assets/svgComponents/MenuSvg/MenuSvg.tsx'
 import PlusSvg from '@/assets/svgComponents/PlusSvg/PlusSvg.tsx'
-import Popup from '@/components/Popup/Popup.tsx'
-import TextInput from '@/components/TextInput/TextInput.tsx'
-import Button from '@/components/Button/Button.tsx'
+import PopupTaskCreation from '@/components/TasksComponents/PopupTaskCreation/PopupTaskCreation.tsx'
 
 const Header: React.FC = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false)
-  const [inputValue, setInputValue] = useState('')
 
   return (
     <div className={styles.wrapper}>
@@ -31,16 +28,7 @@ const Header: React.FC = () => {
           onClick={() => setIsPopupVisible(true)} />
         <MenuSvg className={styles.buttons__item} background={'#ffffff'} color={'#15293E'} />
       </div>
-      {isPopupVisible && (
-        <Popup title={'Создание новой задачи'} onClose={() => setIsPopupVisible(false)}>
-          <TextInput
-            className={styles.popup__input}
-            placeholder={'Создать новую задачу'}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <Button className={styles.popup__create}>Создать</Button>
-        </Popup>)}
+      {isPopupVisible && <PopupTaskCreation setIsPopupVisible={setIsPopupVisible} />}
     </div>
   )
 }

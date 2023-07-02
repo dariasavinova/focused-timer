@@ -1,4 +1,5 @@
 import React from 'react'
+import { useClickAway } from '@uidotdev/usehooks'
 
 import styles from './Popup.module.scss'
 
@@ -12,9 +13,11 @@ interface PopupProps {
 }
 
 const Popup: React.FC<PopupProps> = ({ title, onClose, children }) => {
+  const popupRef = useClickAway(() => onClose())
+
   return (
     <div className={styles.wrapper}>
-      <div className={styles.popup}>
+      <div className={styles.popup} ref={popupRef}>
         <div className={styles.popup__header}>
           <Title className={styles.popup__title} level={3}>{title}</Title>
           <CloseSvg className={styles.popup__close} onClick={onClose} />
