@@ -5,12 +5,13 @@ import styles from '../styles/Svg.module.scss'
 interface PlusSvgProps {
   background: string
   color: string
+  onClick: () => void
   className?: string
 }
 
-const PlusSvg: React.FC<PlusSvgProps> = ({ background, color, className }) => {
+const PlusSvg: React.FC<PlusSvgProps> = ({ background, color, onClick, className}) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} onClick={onClick}>
       <svg className={className}
            width="40px"
            height="40px"

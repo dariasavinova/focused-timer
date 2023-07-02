@@ -1,0 +1,37 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: var(--popup-background);
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup {
+  padding: 40px 50px;
+  background-color: var(--white);
+  font-size: 16px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+
+  &__header {
+    display: flex;
+    align-items: normal;
+    justify-content: space-between;
+    margin: 0 0 20px;
+  }
+
+  &__title {
+    font-weight: 600;
+    margin: 0 15px 0 0;
+  }
+
+  &__close {
+    cursor: pointer;
+  }
+}
