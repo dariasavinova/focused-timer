@@ -20,6 +20,33 @@
   font-weight: 600;
 }
 
+.links {
+  display: flex;
+  justify-content: space-between;
+
+  & > li {
+    margin: 0 10px 0 0;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  &__item {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    opacity: 0.5;
+    transition: opacity 0.25s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
 .buttons {
   display: flex;
 

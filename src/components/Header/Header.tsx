@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import styles from './Header.module.scss'
 import logo from '@/assets/logo.svg'
@@ -20,6 +20,10 @@ const Header: React.FC = () => {
           <Title className={styles.title} level={3}>Focused Timer</Title>
         </div>
       </Link>
+      <ul className={styles.links}>
+        <li><NavLink to={'/'} className={styles.links__item}>Задачи</NavLink></li>
+        <li><NavLink to={'/timer'} className={styles.links__item}>Таймер</NavLink></li>
+      </ul>
       <div className={styles.buttons}>
         <PlusSvg
           className={styles.buttons__item}
