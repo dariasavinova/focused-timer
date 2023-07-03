@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import classNames from 'classnames'
 
 import styles from './InputGroup.module.scss'
@@ -8,10 +8,14 @@ interface InputGroupProps {
   children: React.ReactNode
 }
 
-const InputGroup: React.FC<InputGroupProps> = ({ className, children }) => (
-  <div className={classNames(styles.wrapper, className)}>
-    {children}
-  </div>
-)
+const InputGroup = forwardRef<HTMLDivElement, InputGroupProps>((props, ref) => {
+  const { className, children } = props
+
+  return (
+    <div className={classNames(styles.wrapper, className)} ref={ref}>
+      {children}
+    </div>
+  )
+})
 
 export default InputGroup

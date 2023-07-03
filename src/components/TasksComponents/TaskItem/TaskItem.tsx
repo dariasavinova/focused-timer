@@ -30,6 +30,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
     if (e.composedPath().includes(taskDetailsRef.current!)) return
     setIsDropdownVisible(false)
   })
+  const inputGroupRef = useClickAway(() => setIsInputDisabled(true))
 
   useEffect(() => {
     if (!isInputDisabled && textInputRef.current) {
@@ -46,7 +47,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
   }
 
   return (
-    <InputGroup className={styles.wrapper}>
+    <InputGroup className={styles.wrapper} ref={inputGroupRef}>
       <TextInput
         ref={textInputRef}
         className={styles.input}
