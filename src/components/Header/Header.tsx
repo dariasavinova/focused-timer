@@ -20,11 +20,11 @@ const Header: React.FC = () => {
           <Title className={styles.title} level={3}>Focused Timer</Title>
         </div>
       </Link>
-      <ul className={styles.links}>
-        <li><NavLink to={'/'} className={styles.links__item}>Задачи</NavLink></li>
-        <li><NavLink to={'/timer'} className={styles.links__item}>Таймер</NavLink></li>
-      </ul>
       <div className={styles.buttons}>
+        <ul className={styles.links}>
+          <li><NavLink to={'/'} className={styles.links__item}>Задачи</NavLink></li>
+          <li><NavLink to={'/timer'} className={styles.links__item}>Таймер</NavLink></li>
+        </ul>
         <PlusSvg
           className={styles.buttons__item}
           background={'#ffffff'}
