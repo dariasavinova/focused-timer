@@ -11,7 +11,7 @@ import { useAppDispatch } from '@/hooks/storeDefaultHooks.ts'
 import { editCurrentTask } from '@/store/slices/taskSlice.ts'
 
 interface TaskItemProps {
-  taskId: string
+  taskId: number
   taskName: string
 }
 

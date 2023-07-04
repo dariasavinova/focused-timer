@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { v4 as uuidv4 } from 'uuid'
 
 type TaskItem = {
-  id: string
+  id: number
   taskName: string
   totalTaskHours: number
 }
@@ -12,7 +11,7 @@ type TasksType = {
 }
 
 const taskItem: TaskItem = {
-  id: '',
+  id: 0,
   taskName: '',
   totalTaskHours: 0,
 }
@@ -26,7 +25,7 @@ export const taskSlice = createSlice({
   initialState,
   reducers: {
     createNewTask: (state, action: PayloadAction<string>) => {
-      state.tasks?.push({ ...taskItem, id: uuidv4(), taskName: action.payload })
+      state.tasks?.push({ ...taskItem, id: state.tasks.length + 1, taskName: action.payload })
     },
     editCurrentTask: (state, action) => {
       state.tasks = state.tasks?.map(task => {
@@ -36,7 +35,7 @@ export const taskSlice = createSlice({
         return task
       })
     },
-    deleteCurrentTask: (state, action: PayloadAction<string>) => {
+    deleteCurrentTask: (state, action: PayloadAction<number>) => {
       state.tasks = state.tasks?.filter(task => task.id !== action.payload)
     }
   }

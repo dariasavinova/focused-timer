@@ -9,7 +9,7 @@ import { deleteCurrentTask } from '@/store/slices/taskSlice.ts'
 interface TaskItemDropdownProps {
   setIsInputDisabled: Dispatch<SetStateAction<boolean>>
   setIsDropdownVisible: Dispatch<SetStateAction<boolean>>
-  taskId: string
+  taskId: number
   className?: string
 }
 
