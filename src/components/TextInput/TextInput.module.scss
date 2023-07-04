@@ -11,6 +11,7 @@
   &:focus {
     background-color: var(--white);
     border: 1.6px solid var(--blue);
+    cursor: auto;
   }
 
   &:hover {

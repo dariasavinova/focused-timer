@@ -9,6 +9,13 @@
 .input {
   margin: 0 0 10px;
   cursor: pointer;
+  background-color: var(--white);
+  border-top: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
+  border-bottom: 1px solid var(--grey-element);
+  border-radius: 0;
+  transition: all 0.25s ease;
 }
 
 .details {
@@ -31,5 +38,6 @@
 .wrapper, .details, .dropdown {
   &:hover .input {
     border: 1.6px solid var(--blue);
+    border-radius: 5px;
   }
 }
