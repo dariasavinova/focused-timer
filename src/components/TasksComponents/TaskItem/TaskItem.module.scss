@@ -16,6 +16,10 @@
   border-bottom: 1px solid var(--grey-element);
   border-radius: 0;
   transition: all 0.25s ease;
+
+  &__wrapper {
+    width: 100%;
+  }
 }
 
 .details {

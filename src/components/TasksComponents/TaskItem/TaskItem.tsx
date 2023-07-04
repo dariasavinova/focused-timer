@@ -1,5 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react'
 import { useClickAway } from '@uidotdev/usehooks'
+import { useNavigate } from 'react-router-dom'
 
 import styles from './TaskItem.module.scss'
 
@@ -23,6 +24,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
   const dispatch = useAppDispatch()
   const [isInputDisabled, setIsInputDisabled] = useState(true)
   const [isDropdownVisible, setIsDropdownVisible] = useState(false)
+  const navigate = useNavigate()
 
   const textInputRef = useRef<HTMLInputElement>(null)
   const taskDetailsRef = useRef<HTMLDivElement>(null)
@@ -48,14 +50,16 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
 
   return (
     <InputGroup className={styles.wrapper} ref={inputGroupRef}>
-      <TextInput
-        ref={textInputRef}
-        className={styles.input}
-        value={taskName}
-        onChange={handleEditCurrentInput}
-        disabled={isInputDisabled}
-        onKeyDown={handleKeyDown}
-      />
+      <div className={styles.input__wrapper} onClick={() => navigate(`/timer`)}>
+        <TextInput
+          ref={textInputRef}
+          className={styles.input}
+          value={taskName}
+          onChange={handleEditCurrentInput}
+          disabled={isInputDisabled}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
       <div className={styles.details}
            onClick={() => setIsDropdownVisible(!isDropdownVisible)}
            ref={taskDetailsRef}>
