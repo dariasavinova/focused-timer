@@ -8,7 +8,7 @@ export type TaskItem = {
 
 type TasksType = {
   tasks: TaskItem[]
-  activeTaskId: number
+  activeTask: TaskItem
 }
 
 const taskItem: TaskItem = {
@@ -19,7 +19,7 @@ const taskItem: TaskItem = {
 
 const initialState: TasksType = {
   tasks: [],
-  activeTaskId: 0
+  activeTask: taskItem
 }
 
 export const taskSlice = createSlice({
@@ -40,11 +40,11 @@ export const taskSlice = createSlice({
     deleteCurrentTask: (state, action: PayloadAction<number>) => {
       state.tasks = state.tasks?.filter(task => task.id !== action.payload)
     },
-    changeActiveTaskId: (state, action: PayloadAction<number>) => {
-      state.activeTaskId = action.payload
+    changeActiveTask: (state, action: PayloadAction<TaskItem>) => {
+      state.activeTask = action.payload
     }
   }
 })
 
-export const { createNewTask, editCurrentTask, deleteCurrentTask, changeActiveTaskId } = taskSlice.actions
+export const { createNewTask, editCurrentTask, deleteCurrentTask, changeActiveTask } = taskSlice.actions
 export default taskSlice.reducer

@@ -9,18 +9,18 @@ import TextInput from '@/components/TextInput/TextInput.tsx'
 import TaskItemDropdown from '@/components/TasksComponents/TaskItemDropdown/TaskItemDropdown.tsx'
 import DotsSvg from '@/assets/svgComponents/DotsSvg/DotsSvg.tsx'
 import { useAppDispatch } from '@/hooks/storeDefaultHooks.ts'
-import { editCurrentTask, changeActiveTaskId } from '@/store/slices/taskSlice.ts'
+import { editCurrentTask, changeActiveTask, TaskItem } from '@/store/slices/taskSlice.ts'
 
 interface TaskItemProps {
-  taskId: number
-  taskName: string
+  task: TaskItem
 }
 
 type EventComposedPath = MouseEvent & {
   composedPath(): Node[]
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
+const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
+  const { id, taskName, totalTaskHours } = task
   const dispatch = useAppDispatch()
   const [isInputDisabled, setIsInputDisabled] = useState(true)
   const [isDropdownVisible, setIsDropdownVisible] = useState(false)
@@ -41,7 +41,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
   }, [isInputDisabled])
 
   const handleEditCurrentInput = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(editCurrentTask({ taskId, taskName: (e.target as HTMLInputElement).value }))
+    dispatch(editCurrentTask({ id, taskName: (e.target as HTMLInputElement).value }))
   }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -49,7 +49,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
   }
 
   const handleStartNewTimer = () => {
-    dispatch(changeActiveTaskId(taskId))
+    dispatch(changeActiveTask(task))
     navigate(`/timer`)
   }
 
@@ -77,7 +77,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
           <TaskItemDropdown
             setIsInputDisabled={setIsInputDisabled}
             setIsDropdownVisible={setIsDropdownVisible}
-            taskId={taskId}
+            taskId={id}
             className={styles.dropdown}
           />
         </div>

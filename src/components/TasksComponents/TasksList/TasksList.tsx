@@ -12,7 +12,7 @@ const TasksList: React.FC = () => {
       {tasks.length > 0 ? (
         <ul>
           {tasks?.map(task => (
-            <TaskItem key={task.id} taskId={task.id} taskName={task.taskName} />
+            <TaskItem key={task.id} task={task} />
           ))}
         </ul>
       ) : (
