@@ -26,7 +26,7 @@ const TimerCountdown: React.FC = () => {
         }
       })
       return () => clearInterval(timerInterval)
-    }, 1000)
+    }, 3)
   }
 
   return (

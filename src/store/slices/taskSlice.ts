@@ -31,7 +31,7 @@ export const taskSlice = createSlice({
     },
     editCurrentTask: (state, action) => {
       state.tasks = state.tasks?.map(task => {
-        if (task.id === action.payload.taskId) {
+        if (task.id === action.payload.id) {
           return { ...task, taskName: action.payload.taskName }
         }
         return task
