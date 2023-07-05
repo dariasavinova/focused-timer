@@ -21,7 +21,7 @@ export const useIncreaseTimer = (isTimerRunning: boolean, setTimerValue: React.D
             }
           }
         })
-      }, 2)
+      }, 1000)
     }
     return () => clearInterval(timerInterval)
   }, [isTimerRunning])
