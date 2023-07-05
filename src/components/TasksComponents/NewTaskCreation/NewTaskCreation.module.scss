@@ -6,3 +6,12 @@
 .input {
   margin: 0 10px 0 0;
 }
+
+.button {
+  background-color: var(--grey-element);
+
+  &:hover {
+    opacity: 1;
+    background-color: var(--black);
+  }
+}

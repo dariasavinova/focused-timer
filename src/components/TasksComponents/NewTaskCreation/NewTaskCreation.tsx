@@ -41,9 +41,11 @@ const NewTaskCreation: React.FC<NewTaskCreationProps> = ({ className }) => {
           onChange={e => setInputValue(e.target.value)}
           onKeyDown={handleKeydownCreateNewTask}
         />
-        <Button onClick={handleCreateNewTask}
-                onMouseEnter={() => setHoveredButton(true)}
-                onMouseLeave={() => setHoveredButton(false)}
+        <Button
+          className={styles.button}
+          onClick={handleCreateNewTask}
+          onMouseEnter={() => setHoveredButton(true)}
+          onMouseLeave={() => setHoveredButton(false)}
         >
           <MinimalPlusSvg color={hoveredButton ? '#fff' : '#222937'} />
         </Button>

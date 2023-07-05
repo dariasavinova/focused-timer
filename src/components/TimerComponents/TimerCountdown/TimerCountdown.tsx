@@ -34,9 +34,9 @@ const TimerCountdown: React.FC = () => {
         {formatTimerValueWithZero(timerValue.seconds)}
       </Title>
       <div className={styles.buttons}>
-        <Button onClick={handleStartTimer}>Старт</Button>
-        <Button onClick={handlePauseTimer}>Пауза</Button>
-        <Button>Сброс</Button>
+        <Button onClick={handleStartTimer} disabled={isTimerRunning}>Старт</Button>
+        <Button onClick={handlePauseTimer} disabled={!isTimerRunning}>Пауза</Button>
+        <Button disabled={!isTimerRunning}>Сброс</Button>
       </div>
     </div>
   )
