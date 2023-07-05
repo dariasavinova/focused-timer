@@ -67,9 +67,10 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
         />
       </div>
       {isInputDisabled && (
-        <div className={styles.details}
-             onClick={() => setIsDropdownVisible(!isDropdownVisible)}
-             ref={taskDetailsRef}>
+        <div
+          className={styles.details}
+          onClick={() => setIsDropdownVisible(!isDropdownVisible)}
+          ref={taskDetailsRef}>
           <DotsSvg />
         </div>
       )}

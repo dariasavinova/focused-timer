@@ -5,28 +5,25 @@ import styles from './TimerCountdown.module.scss'
 import Title from '@/components/Title/Title.tsx'
 import Button from '@/components/Button/Button.tsx'
 import { formatTimerValueWithZero } from '@/utils/formatTimerValueWithZero.ts'
+import { useIncreaseTimer } from '@/hooks/useIncreaseTimer.ts'
 // import { useAppSelector } from '@/hooks/storeDefaultHooks.ts'
 
 const TimerCountdown: React.FC = () => {
   // const activeTask = useAppSelector(state => state.taskSlice.activeTask)
 
+  const [isTimerRunning, setIsTimerRunning] = useState(false)
   const [timerValue, setTimerValue] = useState({ hours: 0, minutes: 0, seconds: 0 })
+  let timerInterval: NodeJS.Timer
+
+  useIncreaseTimer(isTimerRunning, setTimerValue)
 
   const handleStartTimer = () => {
-    const timerInterval = setInterval(() => {
-      setTimerValue(prev => {
-        if (prev.seconds < 60) {
-          return { ...prev, seconds: prev.seconds + 1 }
-        } else {
-          if (prev.minutes < 60) {
-            return { ...prev, minutes: prev.minutes + 1, seconds: 0 }
-          } else {
-            return { ...prev, hours: prev.hours + 1, minutes: 0, seconds: 0 }
-          }
-        }
-      })
-      return () => clearInterval(timerInterval)
-    }, 3)
+    setIsTimerRunning(true)
+  }
+
+  const handlePauseTimer = () => {
+    setIsTimerRunning(false)
+    clearInterval(timerInterval)
   }
 
   return (
@@ -38,7 +35,7 @@ const TimerCountdown: React.FC = () => {
       </Title>
       <div className={styles.buttons}>
         <Button onClick={handleStartTimer}>Старт</Button>
-        <Button>Пауза</Button>
+        <Button onClick={handlePauseTimer}>Пауза</Button>
         <Button>Сброс</Button>
       </div>
     </div>
