@@ -11,8 +11,9 @@ import { useIncreaseTimer } from '@/hooks/useIncreaseTimer.ts'
 const TimerCountdown: React.FC = () => {
   // const activeTask = useAppSelector(state => state.taskSlice.activeTask)
 
+  const initialTimerObject = { hours: 0, minutes: 0, seconds: 0 }
   const [isTimerRunning, setIsTimerRunning] = useState(false)
-  const [timerValue, setTimerValue] = useState({ hours: 0, minutes: 0, seconds: 0 })
+  const [timerValue, setTimerValue] = useState(initialTimerObject)
   let timerInterval: NodeJS.Timer
 
   useIncreaseTimer(isTimerRunning, setTimerValue)
@@ -26,6 +27,11 @@ const TimerCountdown: React.FC = () => {
     clearInterval(timerInterval)
   }
 
+  const handleResetTimer = () => {
+    setIsTimerRunning(false)
+    setTimerValue(initialTimerObject)
+  }
+
   return (
     <div className={styles.wrapper}>
       <Title className={styles.time} level={1}>
@@ -36,7 +42,11 @@ const TimerCountdown: React.FC = () => {
       <div className={styles.buttons}>
         <Button onClick={handleStartTimer} disabled={isTimerRunning}>Старт</Button>
         <Button onClick={handlePauseTimer} disabled={!isTimerRunning}>Пауза</Button>
-        <Button disabled={!isTimerRunning}>Сброс</Button>
+        <Button
+          onClick={handleResetTimer}
+          disabled={timerValue.hours === 0 && timerValue.minutes === 0 && timerValue.seconds === 0}>
+          Сброс
+        </Button>
       </div>
     </div>
   )
