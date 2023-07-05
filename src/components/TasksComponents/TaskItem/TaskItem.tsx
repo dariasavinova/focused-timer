@@ -9,7 +9,7 @@ import TextInput from '@/components/TextInput/TextInput.tsx'
 import TaskItemDropdown from '@/components/TasksComponents/TaskItemDropdown/TaskItemDropdown.tsx'
 import DotsSvg from '@/assets/svgComponents/DotsSvg/DotsSvg.tsx'
 import { useAppDispatch } from '@/hooks/storeDefaultHooks.ts'
-import { editCurrentTask } from '@/store/slices/taskSlice.ts'
+import { editCurrentTask, changeActiveTaskId } from '@/store/slices/taskSlice.ts'
 
 interface TaskItemProps {
   taskId: number
@@ -48,9 +48,14 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
     if (e.code === 'Enter') setIsInputDisabled(true)
   }
 
+  const handleStartNewTimer = () => {
+    dispatch(changeActiveTaskId(taskId))
+    navigate(`/timer`)
+  }
+
   return (
     <InputGroup className={styles.wrapper} ref={inputGroupRef}>
-      <div className={styles.input__wrapper} onClick={() => navigate(`/timer`)}>
+      <div className={styles.input__wrapper} onClick={isInputDisabled ? handleStartNewTimer : undefined}>
         <TextInput
           ref={textInputRef}
           className={styles.input}
@@ -60,11 +65,13 @@ const TaskItem: React.FC<TaskItemProps> = ({ taskId, taskName }) => {
           onKeyDown={handleKeyDown}
         />
       </div>
-      <div className={styles.details}
-           onClick={() => setIsDropdownVisible(!isDropdownVisible)}
-           ref={taskDetailsRef}>
-        <DotsSvg />
-      </div>
+      {isInputDisabled && (
+        <div className={styles.details}
+             onClick={() => setIsDropdownVisible(!isDropdownVisible)}
+             ref={taskDetailsRef}>
+          <DotsSvg />
+        </div>
+      )}
       {isDropdownVisible && (
         <div ref={dropdownRef}>
           <TaskItemDropdown

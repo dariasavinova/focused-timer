@@ -14,3 +14,14 @@
   transition: fill 0.25s ease;
 }
 
+.wrapper_fromBlackToWhite {
+  font-size: 4px;
+
+  &:hover .svg_background {
+    fill: var(--white);
+  }
+
+  &:hover .svg_color {
+    fill: var(--black);
+  }
+}

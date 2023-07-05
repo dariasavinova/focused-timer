@@ -17,6 +17,10 @@
   border-radius: 0;
   transition: all 0.25s ease;
 
+  &[disabled] {
+    padding-right: 60px;
+  }
+
   &__wrapper {
     width: 100%;
   }

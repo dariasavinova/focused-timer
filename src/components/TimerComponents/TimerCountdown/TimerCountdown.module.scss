@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.time {
+  display: flex;
+  font-size: 60px;
+  font-weight: 600;
+  margin: 0 0 30px;
+}
+
+.buttons {
+  display: flex;
+
+  & > button {
+    padding: 10px 20px;
+    margin: 0 10px 0 0;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
