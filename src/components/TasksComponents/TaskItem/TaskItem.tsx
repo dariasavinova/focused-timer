@@ -20,7 +20,8 @@ type EventComposedPath = MouseEvent & {
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
-  const { id, taskName, totalTaskHours } = task
+  const { id, taskName } = task
+  // TODO: добавить отображение totalTaskHours
   const dispatch = useAppDispatch()
   const [isInputDisabled, setIsInputDisabled] = useState(true)
   const [isDropdownVisible, setIsDropdownVisible] = useState(false)
