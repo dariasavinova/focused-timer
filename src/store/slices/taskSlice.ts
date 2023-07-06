@@ -1,9 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+interface TotalTaskHours {
+  hours: number
+  minutes: number
+  seconds: number
+}
+
 export type TaskItem = {
   id: number
   taskName: string
-  totalTaskHours: number
+  totalTaskHours: TotalTaskHours
 }
 
 type TasksType = {
@@ -11,10 +17,15 @@ type TasksType = {
   activeTask: TaskItem
 }
 
+type ActionPayloadSaveTotalTaskHours = {
+  id: number
+  totalTaskHours: TotalTaskHours
+}
+
 const taskItem: TaskItem = {
   id: 0,
   taskName: '',
-  totalTaskHours: 0,
+  totalTaskHours: { hours: 0, minutes: 0, seconds: 0 },
 }
 
 const initialState: TasksType = {
@@ -42,9 +53,26 @@ export const taskSlice = createSlice({
     },
     changeActiveTask: (state, action: PayloadAction<TaskItem>) => {
       state.activeTask = action.payload
+    },
+    saveTotalTaskHours: (state, action: PayloadAction<ActionPayloadSaveTotalTaskHours>) => {
+      state.tasks = state.tasks?.map(task => {
+        if (task.id === action.payload.id) {
+          //   return {
+          //     ...task,
+          //     totalTaskHours: action.payload.totalTaskHours
+          //   }
+        }
+        return task
+      })
     }
   }
 })
 
-export const { createNewTask, editCurrentTask, deleteCurrentTask, changeActiveTask } = taskSlice.actions
+export const {
+  createNewTask,
+  editCurrentTask,
+  deleteCurrentTask,
+  changeActiveTask,
+  saveTotalTaskHours
+} = taskSlice.actions
 export default taskSlice.reducer
