@@ -9,7 +9,8 @@ export const useIncreaseTimer = (
 ) => {
   if (window.Worker) {
     const timerWorker = useMemo(() =>
-        new Worker(new URL('@/workers/timerInterval.ts', import.meta.url)),
+        new Worker(new URL('@/workers/timerInterval.ts', import.meta.url),
+          { type: 'module' }),
       []
     )
 
