@@ -17,9 +17,8 @@ const TimerCountdown: React.FC = () => {
   const [isTimerRunning, setIsTimerRunning] = useState(false)
   const [timerValue, setTimerValue] = useState(initialTimerObject)
   const timerValueRef = useRef(initialTimerObject)
-  let timerInterval: NodeJS.Timer
 
-  useIncreaseTimer(isTimerRunning, setTimerValue)
+  useIncreaseTimer(isTimerRunning, timerValue, setTimerValue)
 
   useEffect(() => {
     timerValueRef.current = timerValue
@@ -30,15 +29,6 @@ const TimerCountdown: React.FC = () => {
       dispatch(saveTotalTaskHours({ id: activeTask.id, totalTaskHours: timerValueRef.current }))
     }
   }, [])
-
-  const handleStartTimer = () => {
-    setIsTimerRunning(true)
-  }
-
-  const handlePauseTimer = () => {
-    setIsTimerRunning(false)
-    clearInterval(timerInterval)
-  }
 
   const handleResetTimer = () => {
     setIsTimerRunning(false)
@@ -53,8 +43,8 @@ const TimerCountdown: React.FC = () => {
         {formatTimerValueWithZero(timerValue.seconds)}
       </Title>
       <div className={styles.buttons}>
-        <Button onClick={handleStartTimer} disabled={isTimerRunning}>Старт</Button>
-        <Button onClick={handlePauseTimer} disabled={!isTimerRunning}>Пауза</Button>
+        <Button onClick={() => setIsTimerRunning(true)} disabled={isTimerRunning}>Старт</Button>
+        <Button onClick={() => setIsTimerRunning(false)} disabled={!isTimerRunning}>Пауза</Button>
         <Button
           onClick={handleResetTimer}
           disabled={timerValue.hours === 0 && timerValue.minutes === 0 && timerValue.seconds === 0}>

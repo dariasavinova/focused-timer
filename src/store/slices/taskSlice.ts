@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface TotalTaskHours {
+export interface TotalTaskHours {
   hours: number
   minutes: number
   seconds: number
