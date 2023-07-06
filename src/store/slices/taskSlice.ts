@@ -57,10 +57,14 @@ export const taskSlice = createSlice({
     saveTotalTaskHours: (state, action: PayloadAction<ActionPayloadSaveTotalTaskHours>) => {
       state.tasks = state.tasks?.map(task => {
         if (task.id === action.payload.id) {
-          //   return {
-          //     ...task,
-          //     totalTaskHours: action.payload.totalTaskHours
-          //   }
+          return {
+            ...task,
+            totalTaskHours: {
+              hours: task.totalTaskHours.hours + action.payload.totalTaskHours.hours,
+              minutes: task.totalTaskHours.minutes + action.payload.totalTaskHours.minutes,
+              seconds: task.totalTaskHours.seconds + action.payload.totalTaskHours.seconds,
+            }
+          }
         }
         return task
       })
