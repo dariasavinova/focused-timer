@@ -16,7 +16,7 @@ const TasksList: React.FC = () => {
           ))}
         </ul>
       ) : (
-        <Title level={4}>Пока что вы не создали ни одной задачи.</Title>
+        <Title level={5}>Пока что вы не создали ни одной задачи.</Title>
       )}
     </>
   )
