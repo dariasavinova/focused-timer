@@ -3,7 +3,9 @@
   top: 0;
   left: 0;
   background: var(--popup-background);
+  padding: 30px;
   z-index: 10000;
+  min-width: 320px;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -20,16 +22,33 @@
   max-width: 500px;
   width: 100%;
 
+  @media (max-width: 768px) {
+    padding: 35px 30px;
+  }
+
   &__header {
     display: flex;
     align-items: normal;
     justify-content: space-between;
     margin: 0 0 20px;
+
+    @media (max-width: 400px) {
+      align-items: center;
+    }
   }
 
   &__title {
     font-weight: 600;
     margin: 0 15px 0 0;
+
+    @media (max-width: 655px) {
+      font-size: 21px;
+      margin: 0 5px 0 0;
+    }
+
+    @media (max-width: 400px) {
+      font-size: 19px;
+    }
   }
 
   &__close {

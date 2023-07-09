@@ -28,8 +28,10 @@ const PopupTaskCreation: React.FC<PopupTaskCreation> = ({ setIsPopupVisible }) =
     setIsPopupVisible(false)
   }
 
+  console.log(window.innerWidth)
+
   return (
-    <Popup title={'Создание новой задачи'} onClose={() => setIsPopupVisible(false)}>
+    <Popup title={'Создание задачи'} onClose={() => setIsPopupVisible(false)}>
       <InputGroup>
         <TextInput
           className={styles.popup__input}

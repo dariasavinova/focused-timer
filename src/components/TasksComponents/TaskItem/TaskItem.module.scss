@@ -32,6 +32,10 @@
   right: 18px;
   display: none;
   font-size: 20px;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
 
 .dropdown {
