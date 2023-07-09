@@ -25,8 +25,14 @@ const TimerCountdown: React.FC = () => {
   }, [timerValue])
 
   useEffect(() => {
-    return () => {
+    const saveDataOnUnmount = () => {
       dispatch(saveTotalTaskHours({ id: activeTask.id, totalTaskHours: timerValueRef.current }))
+    }
+    window.addEventListener('beforeunload', saveDataOnUnmount)
+
+    return () => {
+      window.removeEventListener('beforeunload', saveDataOnUnmount)
+      saveDataOnUnmount()
     }
   }, [])
 

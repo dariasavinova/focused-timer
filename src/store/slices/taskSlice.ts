@@ -56,13 +56,17 @@ export const taskSlice = createSlice({
     },
     saveTotalTaskHours: (state, action: PayloadAction<ActionPayloadSaveTotalTaskHours>) => {
       state.tasks = state.tasks?.map(task => {
+        const seconds = task.totalTaskHours.seconds + action.payload.totalTaskHours.seconds
+        const hours = task.totalTaskHours.hours + action.payload.totalTaskHours.hours
+        const minutes = task.totalTaskHours.minutes + action.payload.totalTaskHours.minutes
+
         if (task.id === action.payload.id) {
           return {
             ...task,
             totalTaskHours: {
-              hours: task.totalTaskHours.hours + action.payload.totalTaskHours.hours,
-              minutes: task.totalTaskHours.minutes + action.payload.totalTaskHours.minutes,
-              seconds: task.totalTaskHours.seconds + action.payload.totalTaskHours.seconds,
+              hours: hours + Math.floor(minutes / 60),
+              minutes: minutes - (60 * Math.floor(minutes / 60)) + (Math.floor(seconds / 60)),
+              seconds: seconds - (60 * Math.floor(seconds / 60))
             }
           }
         }
