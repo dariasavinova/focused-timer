@@ -9,7 +9,7 @@ import TextInput from '@/components/TextInput/TextInput.tsx'
 import TaskItemDropdown from '@/components/TasksComponents/TaskItemDropdown/TaskItemDropdown.tsx'
 import DotsSvg from '@/assets/svgComponents/DotsSvg/DotsSvg.tsx'
 import { useAppDispatch } from '@/hooks/storeDefaultHooks.ts'
-import { editCurrentTask, changeActiveTask, TaskItem } from '@/store/slices/taskSlice.ts'
+import { editCurrentTask, TaskItem } from '@/store/slices/taskSlice.ts'
 
 interface TaskItemProps {
   task: TaskItem
@@ -21,7 +21,6 @@ type EventComposedPath = MouseEvent & {
 
 const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
   const { id, taskName } = task
-  // TODO: добавить отображение totalTaskHours
   const dispatch = useAppDispatch()
   const [isInputDisabled, setIsInputDisabled] = useState(true)
   const [isDropdownVisible, setIsDropdownVisible] = useState(false)
@@ -50,7 +49,6 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
   }
 
   const handleStartNewTimer = () => {
-    dispatch(changeActiveTask(task))
     navigate(`/timer`)
   }
 

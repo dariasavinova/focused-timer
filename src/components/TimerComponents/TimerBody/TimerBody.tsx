@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import styles from './TimerBody.module.scss'
 
 import Title from '@/components/Title/Title.tsx'
 import TimerCountdown from '@/components/TimerComponents/TimerCountdown/TimerCountdown.tsx'
-import { useAppSelector } from '@/hooks/storeDefaultHooks.ts'
+import { useAppDispatch, useAppSelector } from '@/hooks/storeDefaultHooks.ts'
+import { changeActiveTask } from '@/store/slices/taskSlice.ts'
 
 const TimerBody: React.FC = () => {
-  const activeTask = useAppSelector(state => state.taskSlice.activeTask)
+  const { tasks, activeTask } = useAppSelector(state => state.taskSlice)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const desiredActiveTask = tasks?.find(task => task.id === activeTask.id)!
+    dispatch(changeActiveTask(desiredActiveTask))
+  }, [])
 
   const resultTimeToDisplay = activeTask.totalTaskHours.hours ?
     `Всего времени - ${activeTask.totalTaskHours.hours} ч. ${activeTask.totalTaskHours.minutes} мин.` :
