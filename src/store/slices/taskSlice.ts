@@ -39,6 +39,7 @@ export const taskSlice = createSlice({
   reducers: {
     createNewTask: (state, action: PayloadAction<string>) => {
       state.tasks?.push({ ...taskItem, id: state.tasks.length + 1, taskName: action.payload })
+      state.activeTask = state.tasks.at(-1)!
     },
     editCurrentTask: (state, action) => {
       state.tasks = state.tasks?.map(task => {
@@ -50,6 +51,7 @@ export const taskSlice = createSlice({
     },
     deleteCurrentTask: (state, action: PayloadAction<number>) => {
       state.tasks = state.tasks?.filter(task => task.id !== action.payload)
+      state.activeTask = state.tasks[0]
     },
     changeActiveTask: (state, action: PayloadAction<TaskItem>) => {
       state.activeTask = action.payload
