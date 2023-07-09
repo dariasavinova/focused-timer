@@ -10,8 +10,8 @@ import { saveTotalTaskHours } from '@/store/slices/taskSlice.ts'
 import { useAppDispatch, useAppSelector } from '@/hooks/storeDefaultHooks.ts'
 
 const TimerCountdown: React.FC = () => {
-  const activeTask = useAppSelector(state => state.taskSlice.activeTask)
   const dispatch = useAppDispatch()
+  const activeTask = useAppSelector(state => state.taskSlice.activeTask)
 
   const initialTimerObject = { hours: 0, minutes: 0, seconds: 0 }
   const [isTimerRunning, setIsTimerRunning] = useState(false)

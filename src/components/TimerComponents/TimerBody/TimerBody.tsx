@@ -8,8 +8,8 @@ import { useAppDispatch, useAppSelector } from '@/hooks/storeDefaultHooks.ts'
 import { changeActiveTask } from '@/store/slices/taskSlice.ts'
 
 const TimerBody: React.FC = () => {
-  const { tasks, activeTask } = useAppSelector(state => state.taskSlice)
   const dispatch = useAppDispatch()
+  const { tasks, activeTask } = useAppSelector(state => state.taskSlice)
 
   useEffect(() => {
     const desiredActiveTask = tasks?.find(task => task.id === activeTask.id)!

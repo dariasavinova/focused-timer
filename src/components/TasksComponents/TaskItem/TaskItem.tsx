@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react'
+import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import { useClickAway } from '@uidotdev/usehooks'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,7 +9,7 @@ import TextInput from '@/components/TextInput/TextInput.tsx'
 import TaskItemDropdown from '@/components/TasksComponents/TaskItemDropdown/TaskItemDropdown.tsx'
 import DotsSvg from '@/assets/svgComponents/DotsSvg/DotsSvg.tsx'
 import { useAppDispatch } from '@/hooks/storeDefaultHooks.ts'
-import { editCurrentTask, TaskItem } from '@/store/slices/taskSlice.ts'
+import { changeActiveTask, editCurrentTask, TaskItem } from '@/store/slices/taskSlice.ts'
 
 interface TaskItemProps {
   task: TaskItem
@@ -22,9 +22,9 @@ type EventComposedPath = MouseEvent & {
 const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
   const { id, taskName } = task
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const [isInputDisabled, setIsInputDisabled] = useState(true)
   const [isDropdownVisible, setIsDropdownVisible] = useState(false)
-  const navigate = useNavigate()
 
   const textInputRef = useRef<HTMLInputElement>(null)
   const taskDetailsRef = useRef<HTMLDivElement>(null)
@@ -40,15 +40,8 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
     }
   }, [isInputDisabled])
 
-  const handleEditCurrentInput = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(editCurrentTask({ id, taskName: (e.target as HTMLInputElement).value }))
-  }
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.code === 'Enter') setIsInputDisabled(true)
-  }
-
   const handleStartNewTimer = () => {
+    dispatch(changeActiveTask(task))
     navigate(`/timer`)
   }
 
@@ -59,9 +52,9 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
           ref={textInputRef}
           className={styles.input}
           value={taskName}
-          onChange={handleEditCurrentInput}
+          onChange={e => dispatch(editCurrentTask({ id, taskName: (e.target as HTMLInputElement).value }))}
           disabled={isInputDisabled}
-          onKeyDown={handleKeyDown}
+          onKeyDown={e => e.code === 'Enter' && setIsInputDisabled(true)}
         />
       </div>
       {isInputDisabled && (
@@ -69,7 +62,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
           className={styles.details}
           onClick={() => setIsDropdownVisible(!isDropdownVisible)}
           ref={taskDetailsRef}>
-          <DotsSvg />
+          <DotsSvg color={'#222937'} />
         </div>
       )}
       {isDropdownVisible && (

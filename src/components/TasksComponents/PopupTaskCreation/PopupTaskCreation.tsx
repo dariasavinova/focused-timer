@@ -1,4 +1,4 @@
-import React, { Dispatch, KeyboardEvent, SetStateAction, useEffect, useRef, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 
 import styles from '@/components/Header/Header.module.scss'
 
@@ -14,27 +14,19 @@ interface PopupTaskCreation {
 }
 
 const PopupTaskCreation: React.FC<PopupTaskCreation> = ({ setIsPopupVisible }) => {
-  const [inputValue, setInputValue] = useState('')
   const dispatch = useAppDispatch()
+  const [inputValue, setInputValue] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.focus()
+  }, [])
 
   const handleCreateNewTask = () => {
     if (!inputValue) return
     dispatch(createNewTask(inputValue))
     setIsPopupVisible(false)
   }
-
-  const handleKeydownCreateNewTask = (e: KeyboardEvent) => {
-    if (e.code === 'Enter') {
-      handleCreateNewTask()
-    }
-  }
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [])
 
   return (
     <Popup title={'Создание новой задачи'} onClose={() => setIsPopupVisible(false)}>
@@ -45,7 +37,7 @@ const PopupTaskCreation: React.FC<PopupTaskCreation> = ({ setIsPopupVisible }) =
           placeholder={'Создать новую задачу'}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={handleKeydownCreateNewTask}
+          onKeyDown={e => e.code === 'Enter' && handleCreateNewTask()}
         />
       </InputGroup>
       <Button className={styles.popup__create} onClick={handleCreateNewTask}>Создать</Button>
