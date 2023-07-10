@@ -20,6 +20,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    cursor: pointer;
 
     @media (max-width: 655px) {
       max-width: 100%;

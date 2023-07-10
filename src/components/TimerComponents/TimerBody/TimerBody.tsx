@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './TimerBody.module.scss'
 
 import Title from '@/components/Title/Title.tsx'
 import TimerCountdown from '@/components/TimerComponents/TimerCountdown/TimerCountdown.tsx'
+import Button from '@/components/Button/Button.tsx'
 import { useAppDispatch, useAppSelector } from '@/hooks/storeDefaultHooks.ts'
 import { changeActiveTask } from '@/store/slices/taskSlice.ts'
-import { Link } from 'react-router-dom'
-import Button from '@/components/Button/Button.tsx'
 
 const TimerBody: React.FC = () => {
   const dispatch = useAppDispatch()
   const { tasks, activeTask } = useAppSelector(state => state.taskSlice)
+  const [isTasksListVisible, setIsTasksListVisible] = useState(false)
 
   useEffect(() => {
     const desiredActiveTask = tasks?.find(task => task.id === activeTask.id)!
@@ -33,8 +34,19 @@ const TimerBody: React.FC = () => {
         <>
           <Title className={styles.description} level={5}>
             Текущая задача:
-            <span className={styles.description__taskName}>{activeTask.taskName}</span>
+            <span
+              className={styles.description__taskName}
+              onClick={() => setIsTasksListVisible(!isTasksListVisible)}>
+              {activeTask.taskName}
+            </span>
           </Title>
+          {isTasksListVisible && (
+            <ul>
+              {tasks.map(task => (
+                <li>{task.taskName}</li>
+              ))}
+            </ul>
+          )}
           <TimerCountdown />
           <Title className={styles.time} level={5}>{resultTimeToDisplay}</Title>
         </>
